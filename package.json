@@ -1,10 +1,10 @@
 {
   "name": "nexostock",
   "version": "1.0.0",
-  "description": "Sistema de Inventario SaaS Neumórfico",
-  "main": "api/index.js",
+  "description": "Sistema de Inventario SaaS",
+  "main": "api/auth/login.js",
   "scripts": {
-    "start": "node api/index.js"
+    "start": "node api/auth/login.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
