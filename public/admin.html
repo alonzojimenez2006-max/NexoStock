@@ -1,0 +1,51 @@
+<!-- public/admin.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoStock | Panel SuperAdmin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar neumorphic">
+            <h2>NexoStock</h2>
+            <p>SuperAdmin</p>
+            <nav>
+                <button class="neumorphic-btn active">Gestión SaaS</button>
+                <button class="neumorphic-btn" onclick="logout()">Cerrar Sesión</button>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="header-actions">
+                <h1>Clientes Activos</h1>
+                <button class="neumorphic-btn primary" onclick="showNewClientForm()">+ Nuevo Cliente</button>
+            </div>
+
+            <div class="neumorphic table-container">
+                <table id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tienda</th>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+                            <th>Próximo Pago</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsBody">
+                        <!-- Llenado por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modales ocultos para crear/editar (simplificados en este HTML, manejados por JS) -->
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
