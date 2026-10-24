@@ -178,15 +178,27 @@ async function executeProductAction(url, method, body, successMsg) {
 }
 
 function createProduct() {
-    const data = {
-        code: document.getElementById('new-code').value, name: document.getElementById('new-name').value,
-        category: document.getElementById('new-category').value, buy: document.getElementById('new-buy').value,
-        sell: document.getElementById('new-sell').value, cache: document.getElementById('new-cache').value,
-        stock: document.getElementById('new-stock').value
-    };
-    if (!data.code || !data.name) return showToast("Llena los datos básicos", "error");
-    executeProductAction('/api/products', 'POST', data, "Producto creado exitosamente");
-    document.querySelectorAll('#inv-new input').forEach(inpt => inpt.value = ''); // Limpiar
+    const code = document.getElementById('new-code').value.trim();
+    const name = document.getElementById('new-name').value.trim();
+    const category = document.getElementById('new-category').value;
+    
+    // Convertir estrictamente a números para evitar que PostgreSQL rechace la inserción
+    const buy = parseFloat(document.getElementById('new-buy').value) || 0;
+    const sell = parseFloat(document.getElementById('new-sell').value) || 0;
+    const cache = parseFloat(document.getElementById('new-cache').value) || 0;
+    const stock = parseInt(document.getElementById('new-stock').value) || 0;
+
+    if (!code || !name) return showToast("El código y nombre son obligatorios", "error");
+    
+    executeProductAction('/api/products', 'POST', { code, name, category, buy, sell, cache, stock }, "Producto creado exitosamente");
+    
+    // Limpiar inputs
+    document.getElementById('new-code').value = '';
+    document.getElementById('new-name').value = '';
+    document.getElementById('new-buy').value = '';
+    document.getElementById('new-sell').value = '';
+    document.getElementById('new-cache').value = '';
+    document.getElementById('new-stock').value = '';
 }
 
 function processRestock() {
