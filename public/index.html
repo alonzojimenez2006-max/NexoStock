@@ -187,15 +187,20 @@
                     </div>
                 </div>
                 <div class="charts-grid">
-                    <div class="chart-card neu-outset">
-                        <div style="margin-bottom: 15px; color: var(--text-muted);"><i class="fa-solid fa-chart-column"></i> Top Volumen de Unidades</div>
-                        <div id="bar-chart"></div>
+                    <div class="charts-grid-bottom" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div class="chart-card neu-outset">
+                            <div style="margin-bottom: 15px; color: var(--text-muted);"><i class="fa-solid fa-chart-candlestick"></i> Fluctuación de Costos (Velas)</div>
+                            <div id="candlestick-chart"></div>
+                        </div>
+                        <div class="chart-card neu-outset">
+                            <div style="margin-bottom: 15px; color: var(--text-muted);"><i class="fa-solid fa-chart-pie"></i> Capital por Categoría</div>
+                            <div id="category-chart"></div>
+                        </div>
+                        <div class="chart-card neu-outset">
+                            <div style="margin-bottom: 15px; color: var(--text-muted);"><i class="fa-solid fa-chart-area"></i> Flujo del Almacén</div>
+                            <div id="flow-chart"></div>
+                        </div>
                     </div>
-                    <div class="chart-card neu-outset">
-                        <div style="margin-bottom: 15px; color: var(--text-muted);"><i class="fa-solid fa-heart-pulse"></i> Salud del Inventario</div>
-                        <div id="health-chart"></div>
-                    </div>
-                </div>
             </section>
 
             <!-- INVENTARIO: VER TODO -->
