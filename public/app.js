@@ -261,6 +261,45 @@ function renderCharts() {
     chartsInstance.pie.render();
 }
 
+// Capital por Categoría (Datos Reales)
+    const catData = {};
+    globalProducts.forEach(p => {
+        catData[p.category || 'General'] = (catData[p.category || 'General'] || 0) + (p.purchase_price * p.stock);
+    });
+    
+    if(chartsInstance.cat) chartsInstance.cat.destroy();
+    chartsInstance.cat = new ApexCharts(document.querySelector("#category-chart"), {
+        series: Object.values(catData), labels: Object.keys(catData),
+        chart: { type: 'pie', height: 250 }, theme: { mode: themeMode },
+        legend: { position: 'bottom', labels: { colors: txtCol } }, dataLabels: { enabled: false }, stroke: { show: false }
+    });
+    chartsInstance.cat.render();
+
+    // Fluctuación de Costos (Estético/Simulado)
+    if(chartsInstance.candle) chartsInstance.candle.destroy();
+    chartsInstance.candle = new ApexCharts(document.querySelector("#candlestick-chart"), {
+        series: [{ data: [
+            { x: new Date(2026, 9, 1), y: [120, 135, 110, 125] }, { x: new Date(2026, 9, 8), y: [125, 140, 120, 138] },
+            { x: new Date(2026, 9, 15), y: [138, 155, 130, 145] }, { x: new Date(2026, 9, 22), y: [145, 150, 140, 148] }
+        ]}],
+        chart: { type: 'candlestick', height: 250, toolbar: { show: false } }, theme: { mode: themeMode },
+        xaxis: { type: 'datetime', labels: { style: { colors: txtCol } } }, yaxis: { labels: { style: { colors: txtCol } } }
+    });
+    chartsInstance.candle.render();
+
+    // Flujo de Almacén (Estético/Simulado)
+    if(chartsInstance.flow) chartsInstance.flow.destroy();
+    chartsInstance.flow = new ApexCharts(document.querySelector("#flow-chart"), {
+        series: [
+            { name: 'Entradas', data: [120, 80, 150, 40, 90] }, { name: 'Salidas', data: [40, 90, 60, 110, 30] }
+        ],
+        chart: { type: 'area', height: 250, toolbar: { show: false } }, theme: { mode: themeMode },
+        colors: ['#4299e1', '#e53e3e'], dataLabels: { enabled: false }, stroke: { curve: 'smooth', width: 2 },
+        xaxis: { categories: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5'], labels: { style: { colors: txtCol } } },
+        yaxis: { labels: { style: { colors: txtCol } } }, legend: { position: 'bottom', labels: { colors: txtCol } }
+    });
+    chartsInstance.flow.render();
+
 // 8. GENERADOR DE REPORTES CLIENT-SIDE
 function exportExcel() {
     showToast("Generando Excel...", "info");
